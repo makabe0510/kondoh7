@@ -148,7 +148,7 @@ void MX_UART8_Init(void)
 {
 
   huart8.Instance = UART8;
-  huart8.Init.BaudRate = 1250000;
+  huart8.Init.BaudRate = 921600;
   huart8.Init.WordLength = UART_WORDLENGTH_8B;
   huart8.Init.StopBits = UART_STOPBITS_1;
   huart8.Init.Parity = UART_PARITY_NONE;
@@ -160,8 +160,7 @@ void MX_UART8_Init(void)
   huart8.Init.FIFOMode = UART_FIFOMODE_DISABLE;
   huart8.Init.TXFIFOThreshold = UART_TXFIFO_THRESHOLD_8_8;
   huart8.Init.RXFIFOThreshold = UART_RXFIFO_THRESHOLD_8_8;
-  huart8.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT|UART_ADVFEATURE_RXOVERRUNDISABLE_INIT;
-  huart8.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
+  huart8.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_RXOVERRUNDISABLE_INIT;
   huart8.AdvancedInit.OverrunDisable = UART_ADVFEATURE_OVERRUN_DISABLE;
   if (HAL_UART_Init(&huart8) != HAL_OK)
   {

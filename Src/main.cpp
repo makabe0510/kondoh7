@@ -126,8 +126,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t data[5] = {'O','O','O','O','O'};
-  HAL_UART_Transmit(&huart8,data,5,1);
+  uint8_t data[2] = {'O','K'};
+  HAL_UART_Transmit(&huart8,data,2,1);
   HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
   /* USER CODE END 2 */
 
