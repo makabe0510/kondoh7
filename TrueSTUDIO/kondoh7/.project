@@ -88,6 +88,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Application/Src</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>Application/TrueSTUDIO</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
