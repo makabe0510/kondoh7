@@ -36,6 +36,7 @@ extern osMessageQId J6vectorqueueHandle;
 #define TXHEADER 0xF8
 #define UART8BYTES sizeof(pvector)+2
 uint8_t rx_buff[UART8BYTES];
+uint8_t rx_servo[6];
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
@@ -47,7 +48,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart->Instance==huart8.Instance) //not necessary to check..
+	if(huart->Instance==huart8.Instance)
 	{
 		static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 		if(rx_buff[0]==TXHEADER)
@@ -103,6 +104,23 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 				//continue IT
 		HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
+			//call a context switch if needed..
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	}
+
+
+	//receive from port 1...
+	if(huart->Instance==huart2.Instance)
+	{
+		static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		if(rx_servo[0]-rx_servo[3] == 0xE0) //then data OK...
+		{
+			uint8_t data[3];
+			data[0] = rx_servo[3];
+			data[1] = rx_servo[4]>>1;
+			data[2] = rx_servo[5];
+			HAL_UART_Transmit(&huart8,data,2,1);
+		}
 			//call a context switch if needed..
 		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}

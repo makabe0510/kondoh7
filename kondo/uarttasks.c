@@ -36,6 +36,8 @@ asm("nop");
 }
 }
 
+uint8_t rx_servo[6];
+
 /* StartJ1uartport function */
 //uart2
 void StartJ1uartport(void const * argument)
@@ -65,6 +67,7 @@ void StartJ1uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart2,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart2,rx_servo,6);
 				//delayUs(100);
 				osDelay(1);
 			}
