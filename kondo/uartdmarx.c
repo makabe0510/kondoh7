@@ -109,19 +109,19 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}
 
 
-	//receive from port 1...
-	if(huart->Instance==huart2.Instance)
+	//receive from port 2...
+	if(huart->Instance==huart7.Instance)
 	{
-		static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		if(rx_servo[0]-rx_servo[3] == 0xE0) //then data OK...
+		// static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		if(rx_servo[0]-rx_servo[3] == 0x80) //then data OK...
 		{
 			uint8_t data[3];
 			data[0] = rx_servo[3];
-			data[1] = rx_servo[4]>>1;
+			data[1] = rx_servo[4];
 			data[2] = rx_servo[5];
 			HAL_UART_Transmit(&huart8,data,2,1);
 		}
 			//call a context switch if needed..
-		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 }

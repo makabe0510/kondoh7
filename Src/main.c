@@ -1,3 +1,4 @@
+
 /**
   ******************************************************************************
   * @file           : main.c
@@ -50,7 +51,6 @@
 #include "stm32h7xx_hal.h"
 #include "cmsis_os.h"
 #include "adc.h"
-#include "dma.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -139,7 +139,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_ADC1_Init();
   MX_SPI3_Init();
   MX_UART4_Init();

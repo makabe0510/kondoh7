@@ -69,7 +69,7 @@ void StartJ1uartport(void const * argument)
 				HAL_UART_Transmit(&huart2,datatosend,3,1);
 				HAL_UART_Receive_IT(&huart2,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
@@ -104,8 +104,9 @@ void StartJ2uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart7,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart7,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
@@ -139,8 +140,9 @@ void StartJ3uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart5,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart5,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
@@ -174,8 +176,9 @@ void StartJ4uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart4,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart4,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
@@ -209,8 +212,9 @@ void StartJ5uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart3,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart3,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
@@ -245,8 +249,9 @@ void StartJ6uartport(void const * argument)
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart1,datatosend,3,1);
+				HAL_UART_Receive_IT(&huart1,rx_servo,6);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
 		}
 		else
