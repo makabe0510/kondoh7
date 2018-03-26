@@ -57,6 +57,7 @@
 
 
 /* USER CODE BEGIN Includes */
+#include "imu_mpu9250.h"
 
 /* USER CODE END Includes */
 
@@ -78,6 +79,8 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 #define UART8BYTES sizeof(pvector)+2
 extern uint8_t rx_buff[UART8BYTES];
+Imu imu_;
+
 /* USER CODE END 0 */
 
 /**
@@ -128,6 +131,7 @@ int main(void)
   uint8_t data[2] = {'O','K'};
   HAL_UART_Transmit(&huart8,data,2,1);
   HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
+  imu_.init(&hspi3);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -145,7 +149,6 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 

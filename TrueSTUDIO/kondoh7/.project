@@ -178,9 +178,19 @@
 			<locationURI>PARENT-2-PROJECT_LOC/kondo/uartdmarx.c</locationURI>
 		</link>
 		<link>
+			<name>Application/tasks/Imu</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>Application/tasks/idletasks.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/kondo/idletasks.c</locationURI>
+		</link>
+		<link>
+			<name>Application/tasks/imutask.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Imu/imutask.c</locationURI>
 		</link>
 		<link>
 			<name>Application/tasks/uarttasks.c</name>
@@ -351,6 +361,16 @@
 			<name>Middlewares/FreeRTOS/timers.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
+		</link>
+		<link>
+			<name>Application/tasks/Imu/imu_mpu9250.cpp</name>
+			<type>1</type>
+			<location>C:/Users/leus/Desktop/kondoh7/Imu/imu_mpu9250.cpp</location>
+		</link>
+		<link>
+			<name>Application/tasks/Imu/imu_mpu9250.h</name>
+			<type>1</type>
+			<location>C:/Users/leus/Desktop/kondoh7/Imu/imu_mpu9250.h</location>
 		</link>
 	</linkedResources>
 </projectDescription>
