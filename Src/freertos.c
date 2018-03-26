@@ -65,12 +65,14 @@ osThreadId J3uartportHandle;
 osThreadId J4uartportHandle;
 osThreadId J5uartportHandle;
 osThreadId J6uartportHandle;
+osThreadId ImuportHandle;
 osMessageQId J1vectorqueueHandle;
 osMessageQId J2vectorqueueHandle;
 osMessageQId J3vectorqueueHandle;
 osMessageQId J4vectorqueueHandle;
 osMessageQId J5vectorqueueHandle;
 osMessageQId J6vectorqueueHandle;
+osMessageQId ImuqueueHandle;
 
 /* USER CODE BEGIN Variables */
 
@@ -86,6 +88,7 @@ void StartJ3uartport(void const * argument);
 void StartJ4uartport(void const * argument);
 void StartJ5uartport(void const * argument);
 void StartJ6uartport(void const * argument);
+void StartImuport(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -151,6 +154,10 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(J6uartport, StartJ6uartport, osPriorityIdle, 0, 128);
   J6uartportHandle = osThreadCreate(osThread(J6uartport), NULL);
 
+  /* definition and creation of Imuport */
+  osThreadDef(Imuport, StartImuport, osPriorityIdle, 0, 128);
+  ImuportHandle = osThreadCreate(osThread(Imuport), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -179,6 +186,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of J6vectorqueue */
   osMessageQDef(J6vectorqueue, 1, pvector);
   J6vectorqueueHandle = osMessageCreate(osMessageQ(J6vectorqueue), NULL);
+
+  /* definition and creation of Imuqueue */
+  osMessageQDef(Imuqueue, 1, ImuData);
+  ImuqueueHandle = osMessageCreate(osMessageQ(Imuqueue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -292,6 +303,18 @@ __weak void StartJ6uartport(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartJ6uartport */
+}
+
+/* StartImuport function */
+__weak void StartImuport(void const * argument)
+{
+  /* USER CODE BEGIN StartImuport */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartImuport */
 }
 
 /* USER CODE BEGIN Application */

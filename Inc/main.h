@@ -92,7 +92,12 @@ uint8_t servoIDstart; //the start ID..
 uint16_t angle[10]; //max ten.... unsure.. to be tested...
 }pvector;
 
-
+typedef struct ImuData_t
+{
+	int16_t acc[3];
+	int16_t gyro[3];
+	int16_t mag[3];
+}ImuData;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
