@@ -103,10 +103,10 @@ void StartJ2uartport(void const * argument)
 				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
 				motornum++;
 				//now send to data
-				HAL_UART_Transmit(&huart7,datatosend,3,1);
 				HAL_UART_Receive_IT(&huart7,rx_servo,6);
+				while(HAL_UART_Transmit(&huart7,datatosend,3,1));
 				//delayUs(100);
-				osDelay(100);
+				osDelay(1);
 			}
 		}
 		else

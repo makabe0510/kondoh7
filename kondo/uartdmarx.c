@@ -100,7 +100,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			default:
 				break;
 			}
-
+		}
+		else
+		{
+			HAL_UART_Receive(&huart8,rx_buff,UART8BYTES,1);
 		}
 				//continue IT
 		HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
@@ -112,16 +115,34 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	//receive from port 2...
 	if(huart->Instance==huart7.Instance)
 	{
-		// static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		if(rx_servo[0]-rx_servo[3] == 0x80) //then data OK...
+		if(rx_servo[0]-rx_servo[3] >= 0x80 -1) //then data OK...
 		{
 			uint8_t data[3];
 			data[0] = rx_servo[3];
 			data[1] = rx_servo[4];
 			data[2] = rx_servo[5];
-			HAL_UART_Transmit(&huart8,data,2,1);
+			HAL_UART_Transmit(&huart8,data,3,1);
 		}
-			//call a context switch if needed..
-		// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		else if(rx_servo[3]-rx_servo[0]<0x80&&rx_servo[3]-rx_servo[0]>0x70)
+		{
+			uint8_t data[3];
+			data[0] = rx_servo[0];
+			data[1] = rx_servo[1];
+			data[2] = rx_servo[2];
+			HAL_UART_Transmit(&huart8,data,3,1);
+		}
+		else
+		{
+			HAL_UART_Receive(&huart7,rx_servo,1,0);
+		}
+
+//		if(rx_servo[0]<0x0A) //less than 10 motor
+//		{
+//			uint8_t data[3];
+//			data[0] = rx_servo[0];
+//			data[1] = rx_servo[1]>>1;
+//			data[2] = rx_servo[2];
+//			HAL_UART_Transmit(&huart8,data,3,1);
+//		}
 	}
 }

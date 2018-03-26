@@ -133,6 +133,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/adc.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/dma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/dma.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/freertos.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/freertos.c</locationURI>
@@ -365,12 +370,12 @@
 		<link>
 			<name>Application/tasks/Imu/imu_mpu9250.cpp</name>
 			<type>1</type>
-			<location>C:/Users/leus/Desktop/kondoh7/Imu/imu_mpu9250.cpp</location>
+			<locationURI>PARENT-2-PROJECT_LOC/Imu/imu_mpu9250.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/tasks/Imu/imu_mpu9250.h</name>
 			<type>1</type>
-			<location>C:/Users/leus/Desktop/kondoh7/Imu/imu_mpu9250.h</location>
+			<locationURI>PARENT-2-PROJECT_LOC/Imu/imu_mpu9250.h</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
