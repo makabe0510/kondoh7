@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>E:\cygwin\home\inaba\arm\kondoh7\\kondoh7</ProjectName>
+<ProjectName>C:\Users\chen\Desktop\projects\kondoh7\\kondoh7</ProjectName>
 <ProjectNature>C</ProjectNature> 
 <CMSIS>..\Drivers\CMSIS</CMSIS>
-<HAL_Driver>C:\Users\inaba\STM32Cube\Repository\STM32Cube_FW_H7_V1.2.0\Drivers\CMSIS</HAL_Driver>
+<HAL_Driver>C:\Users\chen\STM32Cube\Repository\STM32Cube_FW_H7_V1.2.0\Drivers\CMSIS</HAL_Driver>
 <Toolchain>TrueSTUDIO</Toolchain>
 <Version>0</Version>
 
 <filestoremove>
     <file>
-    <name>..\Src\main.c</name>
-    <name>..\Src\gpio.c</name>
-    <name>..\Src\adc.c</name>
-    <name>..\Src\dma.c</name>
-    <name>..\Src\freertos.c</name>
-    <name>..\Src\spi.c</name>
-    <name>..\Src\usart.c</name>
-    <name>..\Src\stm32h7xx_it.c</name>
-    <name>..\Src\stm32h7xx_hal_msp.c</name>
-    <name>..\Src\stm32h7xx_hal_timebase_TIM.c</name>
-    <name>..\Src\system_stm32h7xx.c</name>
     </file>
 </filestoremove>
 
@@ -28,14 +17,6 @@
 	   <include></include>
     </Aincludes>
 	<Cincludes>
-	   		<include>../Drivers/STM32H7xx_HAL_Driver/Inc</include>
-	   		<include>../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy</include>
-	   		<include>../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</include>
-	   		<include>../Drivers/CMSIS/Device/ST/STM32H7xx/Include</include>
-	   		<include>../Middlewares/Third_Party/FreeRTOS/Source/include</include>
-	   		<include>../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</include>
-	   		<include>../Drivers/CMSIS/Include</include>
-	   		<include>../Inc</include>
     </Cincludes>
 </inctoremove>
 
@@ -69,8 +50,6 @@
             <define></define>
         </Adefines>
         <Cdefines>
-            <define>__weak=&quot;__attribute__((weak))&quot;</define>
-            <define>__packed=&quot;__attribute__((__packed__))&quot;</define>
             <define>USE_FULL_LL_DRIVER</define>
             <define>MBEDTLS_CONFIG_FILE=&quot;mbedtls_config.h&quot;</define>
         </Cdefines>         
@@ -220,6 +199,10 @@
 
                                 <file>
                                  <name>..\Src\adc.c</name>
+                                </file>
+
+                                <file>
+                                 <name>..\Src\dma.c</name>
                                 </file>
 
                                 <file>
