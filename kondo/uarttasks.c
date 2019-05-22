@@ -66,17 +66,17 @@ void StartJ1uartport(void const * argument)
 			    datatosend[0] = 0x80 + 10;
 				//datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
 				//datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
-				int test_angle = 1000;
-				//for(uint8_t i = 0 ; i < 1; i++){
-					datatosend[1] = (uint8_t)(((test_angle + 0 * 200)&0x3f80) >> 7);//high byte
-					datatosend[2] = (uint8_t)((test_angle + 0 * 200)&0x007f);//low byte
+				int test_angle = 3500;
+				for(uint8_t i = 0 ; i < 80; i++){
+					datatosend[1] = (uint8_t)(((test_angle + i * 100)&0x3f80) >> 7);//high byte
+					datatosend[2] = (uint8_t)((test_angle + i * 100)&0x007f);//low byte
 					//motornum++;
 				//now send to data
 					HAL_UART_Transmit(&huart2,datatosend,3,1);
 				//HAL_UART_Receive_IT(&huart2,rx_servo,6);
 				//delayUs(100);
 					osDelay(100);
-				//}
+				}
 
 			//}
 		//}
