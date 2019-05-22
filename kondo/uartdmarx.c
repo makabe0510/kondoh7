@@ -14,12 +14,12 @@
  * servonum means how man servos are in this port
  * servoIDstart means the start ID....
  */
-static pvector portJ1_anglevector = {.servonum=7,.servoIDstart=1};
-static pvector portJ2_anglevector = {.servonum=7,.servoIDstart=1};
-static pvector portJ3_anglevector = {.servonum=7,.servoIDstart=1};
-static pvector portJ4_anglevector = {.servonum=7,.servoIDstart=1};
-static pvector portJ5_anglevector = {.servonum=7,.servoIDstart=1};
-static pvector portJ6_anglevector = {.servonum=7,.servoIDstart=1};
+static pvector portJ1_anglevector = {.servonum=1,.servoIDstart=10};
+static pvector portJ2_anglevector = {.servonum=1,.servoIDstart=10};
+static pvector portJ3_anglevector = {.servonum=1,.servoIDstart=10};
+static pvector portJ4_anglevector = {.servonum=1,.servoIDstart=10};
+static pvector portJ5_anglevector = {.servonum=1,.servoIDstart=10};
+static pvector portJ6_anglevector = {.servonum=1,.servoIDstart=10};
 /***************
  * queues...
  */

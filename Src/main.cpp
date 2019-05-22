@@ -80,6 +80,85 @@ void SystemClock_Config(void);
 #define UART8BYTES sizeof(pvector)+2
 extern uint8_t rx_buff[UART8BYTES];
 Imu imu_;
+#define MOV_CMD 0x0
+#define AND_CMD 0x1
+#define OR_CMD  0x2
+#define XOR_CMD 0x3
+#define NOT_CMD 0x4
+#define SHIFT_CMD 0x5
+#define ADD_CMD 0x6
+#define SUB_CMD 0x7
+#define MUL_CMD 0x8
+#define DIV_CMD 0x9
+#define MOD_CMD 0xA
+#define JUMP_CMD 0xB
+#define CALL_CMD 0xC
+#define RETURN_CMD 0xD
+#define ICS_CMD 0xE
+#define SERVO_S_CMD 0xF
+#define SERVO_M_CV_CMD 0x10
+#define SERVO_M_MV_CMD 0x11
+#define STRETCH_SPEED_CMD 0x12
+#define VERSION_CMD 0xFD
+#define ACK_CMD 0xFE
+
+int rcb4_emulate(uint8_t *buf)
+{
+	uint8_t len,cmd, *ptr, *p;
+	uint8_t checksum,sum=0,kind;
+	uint8_t *srtp,*destp;
+	int i,src=0,dest=0;
+	ptr = p = buf;
+	len=*ptr++; cmd=*ptr++; kind=*ptr++;
+	for (i=1; i<len; i++) sum += *p++;
+	checksum= *p;
+	if (checksum!=sum) return 1;
+	dest = *ptr++; dest += (*ptr++)<<8;
+	dest += (*ptr++)<<16;
+	switch
+	(cmd)
+	{
+	case MOV_CMD:
+	case AND_CMD:
+	case OR_CMD:
+	case XOR_CMD:
+	case NOT_CMD:
+	case SHIFT_CMD:
+	case ADD_CMD:
+	case SUB_CMD:
+	case MUL_CMD:
+	case DIV_CMD:
+	case MOD_CMD:
+		dest = *ptr++; dest += (*ptr++)<<8;
+		dest += (*ptr++)<<16;
+     	break;
+
+	case JUMP_CMD:
+		break;
+	case CALL_CMD:
+		break;
+	case RETURN_CMD:
+		break;
+	case ICS_CMD:
+		break;
+	case SERVO_S_CMD:
+		break;
+	case SERVO_M_CV_CMD:
+
+		break;
+	case SERVO_M_MV_CMD:
+		break;
+	case STRETCH_SPEED_CMD:
+		break;
+	case VERSION_CMD:
+		break;
+	case ACK_CMD:
+		break;
+	default:
+		;
+	}
+}
+
 
 /* USER CODE END 0 */
 
@@ -131,8 +210,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   uint8_t data[2] = {'O','K'};
   HAL_UART_Transmit(&huart8,data,2,1);
-  HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
   imu_.init(&hspi3);
+
+  HAL_UART_Receive_IT(&huart8,rx_buff,UART8BYTES);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

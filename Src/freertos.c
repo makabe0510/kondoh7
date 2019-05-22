@@ -124,32 +124,32 @@ void MX_FREERTOS_Init(void) {
   LED1TaskHandle = osThreadCreate(osThread(LED1Task), NULL);
 
   /* definition and creation of LED2Task */
-  osThreadDef(LED2Task, StartLED2Task, osPriorityIdle, 0, 128);
-  LED2TaskHandle = osThreadCreate(osThread(LED2Task), NULL);
+  //osThreadDef(LED2Task, StartLED2Task, osPriorityIdle, 0, 128);
+  //LED2TaskHandle = osThreadCreate(osThread(LED2Task), NULL);
 
   /* definition and creation of J1uartport */
   osThreadDef(J1uartport, StartJ1uartport, osPriorityLow, 0, 128);
   J1uartportHandle = osThreadCreate(osThread(J1uartport), NULL);
 
   /* definition and creation of J2uartport */
-  osThreadDef(J2uartport, StartJ2uartport, osPriorityIdle, 0, 128);
-  J2uartportHandle = osThreadCreate(osThread(J2uartport), NULL);
+  //osThreadDef(J2uartport, StartJ2uartport, osPriorityIdle, 0, 128);
+  //J2uartportHandle = osThreadCreate(osThread(J2uartport), NULL);
 
   /* definition and creation of J3uartport */
-  osThreadDef(J3uartport, StartJ3uartport, osPriorityIdle, 0, 128);
-  J3uartportHandle = osThreadCreate(osThread(J3uartport), NULL);
+  //osThreadDef(J3uartport, StartJ3uartport, osPriorityIdle, 0, 128);
+  //J3uartportHandle = osThreadCreate(osThread(J3uartport), NULL);
 
   /* definition and creation of J4uartport */
-  osThreadDef(J4uartport, StartJ4uartport, osPriorityIdle, 0, 128);
-  J4uartportHandle = osThreadCreate(osThread(J4uartport), NULL);
+  //osThreadDef(J4uartport, StartJ4uartport, osPriorityIdle, 0, 128);
+  //J4uartportHandle = osThreadCreate(osThread(J4uartport), NULL);
 
   /* definition and creation of J5uartport */
-  osThreadDef(J5uartport, StartJ5uartport, osPriorityIdle, 0, 128);
-  J5uartportHandle = osThreadCreate(osThread(J5uartport), NULL);
+  //osThreadDef(J5uartport, StartJ5uartport, osPriorityIdle, 0, 128);
+  //J5uartportHandle = osThreadCreate(osThread(J5uartport), NULL);
 
   /* definition and creation of J6uartport */
-  osThreadDef(J6uartport, StartJ6uartport, osPriorityIdle, 0, 128);
-  J6uartportHandle = osThreadCreate(osThread(J6uartport), NULL);
+  //osThreadDef(J6uartport, StartJ6uartport, osPriorityIdle, 0, 128);
+  //J6uartportHandle = osThreadCreate(osThread(J6uartport), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -161,24 +161,24 @@ void MX_FREERTOS_Init(void) {
   J1vectorqueueHandle = osMessageCreate(osMessageQ(J1vectorqueue), NULL);
 
   /* definition and creation of J2vectorqueue */
-  osMessageQDef(J2vectorqueue, 1, pvector);
-  J2vectorqueueHandle = osMessageCreate(osMessageQ(J2vectorqueue), NULL);
+  //osMessageQDef(J2vectorqueue, 1, pvector);
+  //J2vectorqueueHandle = osMessageCreate(osMessageQ(J2vectorqueue), NULL);
 
   /* definition and creation of J3vectorqueue */
-  osMessageQDef(J3vectorqueue, 1, pvector);
-  J3vectorqueueHandle = osMessageCreate(osMessageQ(J3vectorqueue), NULL);
+  //osMessageQDef(J3vectorqueue, 1, pvector);
+  //J3vectorqueueHandle = osMessageCreate(osMessageQ(J3vectorqueue), NULL);
 
   /* definition and creation of J4vectorqueue */
-  osMessageQDef(J4vectorqueue, 1, pvector);
-  J4vectorqueueHandle = osMessageCreate(osMessageQ(J4vectorqueue), NULL);
+  //osMessageQDef(J4vectorqueue, 1, pvector);
+  //J4vectorqueueHandle = osMessageCreate(osMessageQ(J4vectorqueue), NULL);
 
   /* definition and creation of J5vectorqueue */
-  osMessageQDef(J5vectorqueue, 1, pvector);
-  J5vectorqueueHandle = osMessageCreate(osMessageQ(J5vectorqueue), NULL);
+  //osMessageQDef(J5vectorqueue, 1, pvector);
+  //J5vectorqueueHandle = osMessageCreate(osMessageQ(J5vectorqueue), NULL);
 
   /* definition and creation of J6vectorqueue */
-  osMessageQDef(J6vectorqueue, 1, pvector);
-  J6vectorqueueHandle = osMessageCreate(osMessageQ(J6vectorqueue), NULL);
+  //osMessageQDef(J6vectorqueue, 1, pvector);
+  //J6vectorqueueHandle = osMessageCreate(osMessageQ(J6vectorqueue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */

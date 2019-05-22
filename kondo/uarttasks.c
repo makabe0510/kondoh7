@@ -20,20 +20,20 @@ extern osMessageQId J6vectorqueueHandle;
 
 //Delay function
 uint32_t getUs(void) {
-uint32_t usTicks = HAL_RCC_GetSysClockFreq() / 1000000;
-register uint32_t ms, cycle_cnt;
-do {
-ms = HAL_GetTick();
-cycle_cnt = SysTick->VAL;
-} while (ms != HAL_GetTick());
-return (ms * 1000) + (usTicks * 1000 - cycle_cnt) / usTicks;
+	uint32_t usTicks = HAL_RCC_GetSysClockFreq() / 1000000;
+	register uint32_t ms, cycle_cnt;
+	do {
+		ms = HAL_GetTick();
+		cycle_cnt = SysTick->VAL;
+	} while (ms != HAL_GetTick());
+	return (ms * 1000) + (usTicks * 1000 - cycle_cnt) / usTicks;
 }
 
 void delayUs(uint16_t micros) {
-uint32_t start = getUs();
-while (getUs()-start < (uint32_t) micros) {
-asm("nop");
-}
+	uint32_t start = getUs();
+	while (getUs()-start < (uint32_t) micros) {
+		asm("nop");
+	}
 }
 
 uint8_t rx_servo[6];
@@ -50,30 +50,37 @@ void StartJ1uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J1vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J1vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
+			//HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
 			uint8_t datatosend[3];
-			while(1)
-			{
-				if(motornum>=anglevector.servonum)
-				{
-					motornum = 0;
-					break;
-				}
+			//while(motornum < 1)
+			//{
+				//if(motornum>=anglevector.servonum)
+				//{
+				//	motornum = 0;
+				//	break;
+				//}
 				//every 1 mini second control one motor...
-				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
-				motornum++;
+				//datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
+			    datatosend[0] = 0x80 + 10;
+				//datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+				//datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				int test_angle = 1000;
+				//for(uint8_t i = 0 ; i < 1; i++){
+					datatosend[1] = (uint8_t)(((test_angle + 0 * 200)&0x3f80) >> 7);//high byte
+					datatosend[2] = (uint8_t)((test_angle + 0 * 200)&0x007f);//low byte
+					//motornum++;
 				//now send to data
-				HAL_UART_Transmit(&huart2,datatosend,3,1);
-				HAL_UART_Receive_IT(&huart2,rx_servo,6);
+					HAL_UART_Transmit(&huart2,datatosend,3,1);
+				//HAL_UART_Receive_IT(&huart2,rx_servo,6);
 				//delayUs(100);
-				osDelay(100);
-			}
-		}
-		else
-			osDelay(1);
+					osDelay(100);
+				//}
+
+			//}
+		//}
+		//else osDelay(100);
 	}
 
 }
@@ -87,10 +94,10 @@ void StartJ2uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J2vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J2vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
 			uint8_t datatosend[3];
-			while(1)
+			while(motornum < 1)
 			{
 				if(motornum>=anglevector.servonum)
 				{
@@ -99,18 +106,20 @@ void StartJ2uartport(void const * argument)
 				}
 				//every 1 mini second control one motor...
 				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+//				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+//				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				uint8_t test_angle = 7500;
+				datatosend[1] = (uint8_t)((test_angle&0x3f80) >> 7);//high byte
+				datatosend[2] = (uint8_t)(test_angle&0x007f);//low byte
 				motornum++;
 				//now send to data
-				HAL_UART_Receive_IT(&huart7,rx_servo,6);
-				while(HAL_UART_Transmit(&huart7,datatosend,3,1));
+				HAL_UART_Transmit(&huart7,datatosend,3,1);
 				//delayUs(100);
-				osDelay(1);
+				osDelay(100);
 			}
-		}
-		else
-			osDelay(1);
+		//}
+		//else
+		//	osDelay(1);
 	}
 }
 
@@ -123,10 +132,10 @@ void StartJ3uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J3vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J3vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
 			uint8_t datatosend[3];
-			while(1)
+			while(motornum < 1)
 			{
 				if(motornum>=anglevector.servonum)
 				{
@@ -135,18 +144,21 @@ void StartJ3uartport(void const * argument)
 				}
 				//every 1 mini second control one motor...
 				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+		//		datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+			//	datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				uint8_t test_angle = 7500;
+				datatosend[1] = (uint8_t)((test_angle&0x3f80) >> 7);//high byte
+				datatosend[2] = (uint8_t)(test_angle&0x007f);//low byte
+
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart5,datatosend,3,1);
-				HAL_UART_Receive_IT(&huart5,rx_servo,6);
 				//delayUs(100);
 				osDelay(100);
 			}
-		}
-		else
-			osDelay(1);
+		//}
+		//else
+		//	osDelay(1);
 	}
 }
 
@@ -159,10 +171,10 @@ void StartJ4uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J4vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J4vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
 			uint8_t datatosend[3];
-			while(1)
+			while(motornum < 1)
 			{
 				if(motornum>=anglevector.servonum)
 				{
@@ -171,18 +183,20 @@ void StartJ4uartport(void const * argument)
 				}
 				//every 1 mini second control one motor...
 				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				//datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+				//datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				uint8_t test_angle = 7500;
+				datatosend[1] = (uint8_t)((test_angle&0x3f80) >> 7);//high byte
+				datatosend[2] = (uint8_t)(test_angle&0x007f);//low byte
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart4,datatosend,3,1);
-				HAL_UART_Receive_IT(&huart4,rx_servo,6);
 				//delayUs(100);
 				osDelay(100);
 			}
-		}
-		else
-			osDelay(1);
+		//}
+		//else
+		//	osDelay(1);
 	}
 }
 
@@ -195,10 +209,10 @@ void StartJ5uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J5vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J5vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
 			uint8_t datatosend[3];
-			while(1)
+			while(motornum < 1)
 			{
 				if(motornum>=anglevector.servonum)
 				{
@@ -207,18 +221,20 @@ void StartJ5uartport(void const * argument)
 				}
 				//every 1 mini second control one motor...
 				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				//datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+				//datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				uint8_t test_angle = 7500;
+				datatosend[1] = (uint8_t)((test_angle&0x3f80) >> 7);//high byte
+				datatosend[2] = (uint8_t)(test_angle&0x007f);//low byte
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart3,datatosend,3,1);
-				HAL_UART_Receive_IT(&huart3,rx_servo,6);
 				//delayUs(100);
 				osDelay(100);
 			}
-		}
-		else
-			osDelay(1);
+		//}
+		//else
+		//	osDelay(1);
 	}
 
 }
@@ -232,10 +248,10 @@ void StartJ6uartport(void const * argument)
 	for(;;)
 	{
 		//wait for the vector data..
-		if(xQueuePeek(J6vectorqueueHandle,&anglevector,0)==pdPASS)
-		{
+		//if(xQueuePeek(J6vectorqueueHandle,&anglevector,0)==pdPASS)
+		//{
 			uint8_t datatosend[3];
-			while(1)
+			while(motornum < 1)
 			{
 				if(motornum>=anglevector.servonum)
 				{
@@ -244,18 +260,20 @@ void StartJ6uartport(void const * argument)
 				}
 				//every 1 mini second control one motor...
 				datatosend[0] = 0x80 + motornum + anglevector.servoIDstart;
-				datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
-				datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				//datatosend[1] = (uint8_t)((anglevector.angle[motornum]&0x3f80) >> 7);//high byte
+				//datatosend[2] = (uint8_t)(anglevector.angle[motornum]&0x007f);//low byte
+				uint8_t test_angle = 7500;
+				datatosend[1] = (uint8_t)((test_angle&0x3f80) >> 7);//high byte
+				datatosend[2] = (uint8_t)(test_angle&0x007f);//low byte
 				motornum++;
 				//now send to data
 				HAL_UART_Transmit(&huart1,datatosend,3,1);
-				HAL_UART_Receive_IT(&huart1,rx_servo,6);
 				//delayUs(100);
 				osDelay(100);
 			}
-		}
-		else
-			osDelay(1);
+		//}
+		//else
+		//	osDelay(1);
 	}
 
 }
